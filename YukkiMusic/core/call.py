@@ -158,7 +158,7 @@ class Call(PyTgCalls):
                 link, audio_parameters=audio_stream_quality
             )
         )
-        await assistant.change_stream(
+        await assistant.play(
             chat_id,
             stream,
         )
@@ -183,7 +183,7 @@ class Call(PyTgCalls):
                 additional_ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
             )
         )
-        await assistant.change_stream(chat_id, stream)
+        await assistant.play(chat_id, stream)
 
     async def stream_call(self, link):
         assistant = await group_assistant(self, config.LOG_GROUP_ID)
@@ -367,7 +367,7 @@ class Call(PyTgCalls):
                     )
                 )
                 try:
-                    await client.change_stream(chat_id, stream)
+                    await client.play(chat_id, stream)
                 except Exception:
                     return await app.send_message(
                         original_chat_id,
@@ -416,7 +416,7 @@ class Call(PyTgCalls):
                     )
                 )
                 try:
-                    await client.change_stream(chat_id, stream)
+                    await client.play(chat_id, stream)
                 except Exception:
                     return await app.send_message(
                         original_chat_id,
@@ -449,7 +449,7 @@ class Call(PyTgCalls):
                     )
                 )
                 try:
-                    await client.change_stream(chat_id, stream)
+                    await client.play(chat_id, stream)
                 except Exception:
                     return await app.send_message(
                         original_chat_id,
@@ -477,7 +477,7 @@ class Call(PyTgCalls):
                     )
                 )
                 try:
-                    await client.change_stream(chat_id, stream)
+                    await client.play(chat_id, stream)
                 except Exception:
                     return await app.send_message(
                         original_chat_id,
