@@ -461,6 +461,7 @@ async def maintenance_on():
 # Audio Video Limit
 from pytgcalls.types import AudioQuality, VideoQuality
 
+
 async def save_audio_bitrate(chat_id: int, bitrate: str):
     audio[chat_id] = bitrate
 
@@ -472,46 +473,37 @@ async def save_video_bitrate(chat_id: int, bitrate: str):
 async def get_aud_bit_name(chat_id: int) -> str:
     mode = audio.get(chat_id)
     if not mode:
-        return "Ultra"
+        return "High"
     return mode
 
 
 async def get_vid_bit_name(chat_id: int) -> str:
     mode = video.get(chat_id)
-    if not mode:
-        if PRIVATE_BOT_MODE == str(True):
-            return "High"
-        else:
-            return "Medium"
-    return mode
+    return "Medium" if not mode else mode
 
 
 async def get_audio_bitrate(chat_id: int) -> str:
     mode = audio.get(chat_id)
     if not mode:
-        return AudioParameters.from_quality(AudioQuality.STUDIO)
-    if str(mode) == "Ultra":
-        return AudioParameters.from_quality(AudioQuality.STUDIO)
+        return AudioQuality.HIGH
     if str(mode) == "High":
-        return AudioParameters.from_quality(AudioQuality.HIGH)
+        return AudioQuality.STUDIO
     elif str(mode) == "Medium":
-        return AudioParameters.from_quality(AudioQuality.MEDIUM)
+        return AudioQuality.HIGH
     elif str(mode) == "Low":
-        return AudioParameters.from_quality(AudioQuality.LOW)
+        return AudioQuality.LOW()
 
 
 async def get_video_bitrate(chat_id: int) -> str:
     mode = video.get(chat_id)
     if not mode:
         if PRIVATE_BOT_MODE == str(True):
-            return VideoParameters.from_quality(VideoQuality.HD_720p)
+            return VideoQuality.FHD_1080p
         else:
-            return VideoParameters.from_quality(VideoQuality.SD_360p)
-    if str(mode) == "Ultra":
-        return VideoParameters.from_quality(VideoQuality.FHD_1080p)
+            return VideoQuality.HD_720p
     if str(mode) == "High":
-        return VideoParameters.from_quality(VideoQuality.HD_720p)
+        return VideoQuality.QHD_2K
     elif str(mode) == "Medium":
-        return VideoParameters.from_quality(VideoQuality.SD_480p)
+        return VideoQuality.FHD_1080p
     elif str(mode) == "Low":
-        return VideoParameters.from_quality(VideoQuality.SD_360p)
+        return VideoQuality.HD_720p
