@@ -1,12 +1,4 @@
 #
-# Copyright (C) 2023-2024 by YukkiOwner@Github, < https://github.com/YukkiOwner >.
-#
-# This file is part of < https://github.com/YukkiOwner/YukkiMusicBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/YukkiOwner/YukkiMusicBot/blob/master/LICENSE >
-#
-# All rights reserved.
-#
 
 
 import asyncio
@@ -116,7 +108,7 @@ async def close_menu(_, CallbackQuery):
 )
 @ActualAdminCB
 async def stop_download(client, CallbackQuery: CallbackQuery, _):
-    message_id = CallbackQuery.message.message_id
+    message_id = CallbackQuery.message.id
     task = lyrical.get(message_id)
     if not task:
         return await CallbackQuery.answer(
